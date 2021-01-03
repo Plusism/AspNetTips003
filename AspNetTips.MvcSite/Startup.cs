@@ -7,6 +7,8 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 using System.Threading.Tasks;
 
 namespace AspNetTips.MvcSite
@@ -22,6 +24,9 @@ namespace AspNetTips.MvcSite
 
 		public void ConfigureServices(IServiceCollection services)
 		{
+			// ビューのレンダリング時にマルチバイト文字をHTMLエンコードさせない
+			services.AddWebEncoders(options => options.TextEncoderSettings = new TextEncoderSettings(UnicodeRanges.All));
+
 			services.AddControllersWithViews();
 		}
 
